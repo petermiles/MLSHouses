@@ -11,7 +11,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .result-box-shadow:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
-    transform: scale(1.02); }
+    transform: scale(1.05); }
 
 .saved-results {
   opacity: 0;
@@ -21,7 +21,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .saved-results:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
-    transform: scale(1.02); }
+    transform: scale(1.05); }
 
 .result-container {
   height: 100%;

@@ -17,7 +17,7 @@ export default class App extends Component {
       showSaved: false,
       listings: '',
       selected: '',
-      uid: Math.random() * 10000000,
+      uid: '',
       // this is the random userid. I decided to set this up in the constructor because I don't think that assigning a userid would justify a rerender triggered by setState.
     };
     this.propertyRef = [];
@@ -32,17 +32,16 @@ export default class App extends Component {
       .get(
         'https://us-central1-reside-e74b6.cloudfunctions.net/listings/api/get/MLSlisting',
       )
-      .then(
-        (result) => {
-          this.setState({ listings: result.data, loading: false });
-        },
-        () => {
-          // Checks to see if a userid exists in local storage and if it doesn't, set the storage to that ID.
-          if (!localStorage.getItem('uid')) {
-            localStorage.setItem('uid', this.state.uid);
-          }
-        },
-      );
+      .then((result) => {
+        if (!localStorage.getItem('uid')) {
+          localStorage.setItem('uid', Math.random() * 100000);
+        }
+        this.setState({
+          listings: result.data,
+          loading: false,
+          uid: localStorage.getItem('uid'),
+        });
+      });
   }
   selectProperty(id) {
     gsap.hideResults(

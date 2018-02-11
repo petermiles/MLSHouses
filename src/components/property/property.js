@@ -171,16 +171,15 @@ export default class Property extends Component {
               </div>
             </div>
           </div>
-
           <div className="property-footer">
             {this.state.alreadySaved ? (
               <button className="save-button"> Already Saved </button>
-  ) : (
-    <button className="save-button" onClick={this.saveProperty}>
-      {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
-    </button>
-  )}
-          </div>;
+            ) : (
+              <button className="save-button" onClick={this.saveProperty}>
+                {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
+              </button>
+            )}
+          </div>
         </div>
 
         <div className="map-container">

@@ -10,7 +10,7 @@ import './saved.css';
 export default class Saved extends Component {
   constructor(props) {
     super(props);
-    this.state = { listings: '', loading: true };
+    this.state = { listings: [''], loading: true };
 
     this.savedRefs = [];
   }

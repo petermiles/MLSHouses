@@ -37,17 +37,6 @@ export default {
       },
     });
   },
-  hideProperty(target, cb) {
-    return TweenMax.to(target, 0.5, {
-      opacity: 1,
-      onComplete() {
-        if (cb) {
-          cb();
-        }
-      },
-    });
-  },
-
   showSaved(targets, cb, index) {
     TweenMax.to(targets, topRatedDuration, {
       opacity: 1,
