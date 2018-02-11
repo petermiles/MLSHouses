@@ -18,15 +18,16 @@ export default class App extends Component {
       listings: '',
       selected: '',
       uid: Math.random() * 10000000,
-      // this is the random userid.
+      // this is the random userid. I decided to set this up in the constructor because I don't think that assigning a userid would justify a rerender triggered by setState.
     };
-    this.listingsRefs = [];
     this.propertyRef = [];
-    this.savedRef = '';
+    this.listingsRefs = [];
+    this.savedRefs = [];
     this.selectProperty = this.selectProperty.bind(this);
   }
 
   componentDidMount() {
+    console.log(this);
     // I've decided to set up a cloud function for this API call. Consindering the amount of data that I will be presenting is limited, I don't want to subject users to unnecessary data. By parsing out the values that I actually need from the API call in my cloud function, I am able to cut down the data received from the API by 55% ( 10.4KB => 4.6KB) . This might have been overkill, but I am a strong believer in only using resources that are absolutely necessary.
     axios
       .get('https://us-central1-reside-e74b6.cloudfunctions.net/listings/api/get/MLSlisting')
@@ -42,13 +43,14 @@ export default class App extends Component {
       );
   }
   selectProperty(id) {
-    console.log(this.listingsRefs);
-    gsap.hideResults(this.listingsRefs, null, 0.25);
+    gsap.hideResults(
+      this.listingsRefs,
+      this.setState({ selected: this.state.listings.find(x => x.id === id) }),
+      0.25,
+    );
+    // this will trigger the Results component to hide, and the Property component to show. This also will search through the listings and pick the appreiate listing given an ID.
 
-    setTimeout(() => {
-      this.setState({ selected: this.state.listings.find(x => x.id === id) });
-      // time*1000
-    }, 450);
+    // This also will fire a GSAP function that will hide the results page. Make it look pretty.
   }
 
   render() {
@@ -62,13 +64,13 @@ export default class App extends Component {
           <button
             className="navbar-saved-button"
             onClick={() => {
-              this.setState({ showSaved: !this.state.showSaved });
+              this.setState({ showSaved: !this.state.showSaved, selected: '' });
             }}
           >
             {this.state.showSaved ? 'Home' : 'Saved Properties'}
           </button>
         </div>
-
+        {/* In reality, I shouldn't have done a nested ternary. This would have been much simpler to do had I used router, but I wanted to keep everything small enough. */}
         {showSaved ? (
           <div className="saved-container">
             <Saved

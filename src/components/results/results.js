@@ -14,7 +14,12 @@ export default class Results extends Component {
   }
 
   componentWillAppear(cb) {
+    console.log(this.item);
     gsap.showResults(this.item, cb, this.props.index);
+  }
+
+  componentWillLeave(cb) {
+    gsap.hideResults(this.item, cb, this.props.index);
   }
 
   render() {
@@ -31,7 +36,7 @@ export default class Results extends Component {
     return (
       <div
         ref={ref => (this.item = ref)}
-        className="result-box-shadow"
+        className={this.props.saved ? 'saved-results' : 'result-box-shadow'}
         onClick={() => {
           if (id) {
             selectProperty(id);

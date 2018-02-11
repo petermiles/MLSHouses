@@ -50,7 +50,7 @@
 	background-color: #2196f3;
 	font-size: 1.2rem;
 	font-weight: 700;
-	height: 25%;
+	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -89,7 +89,7 @@
 
 .property-specs-wrapper {
 	width: 100%;
-	height: 70%;
+	height: 75%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -98,7 +98,14 @@
 }
 
 .property-specs {
-	width: 60%;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.property-icons {
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -119,7 +126,8 @@
 }
 
 .property-price {
-	font-size: 20px;
+	padding-top: 15px;
+	font-size: 16px;
 }
 
 .property-footer {

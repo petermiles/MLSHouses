@@ -1,7 +1,14 @@
 .saved-wrapper {
 	display: flex;
-	flex-direction: column;
-	background-color: salmon;
-	height: 100%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	height: 24vh;
 	width: 100%;
+}
+
+.saved-dimensions {
+	margin: 1.5% 0;
+	width: 30%;
+	height: 24vh;
 }

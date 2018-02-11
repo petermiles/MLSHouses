@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import toMaterialStyle from 'material-color-hash';
+import { TransitionGroup } from 'react-transition-group';
 import firestore from '../../fire';
 import Results from '../results/results';
 import gsap from '../../gsap/animations';
@@ -24,15 +25,19 @@ export default class Saved extends Component {
         result.forEach((doc) => {
           arr.push(doc.data());
         });
-        this.setState({ listings: arr, loading: false }, () => {
-          console.log(arr);
-        });
+        this.setState({ listings: arr, loading: false });
       })
       .catch(console.log);
   }
 
   componentWillAppear(cb) {
-    gsap.showResults(this.savedRefs, cb, this.props.index);
+    if (this.savedRefs.length) {
+      gsap.showResults(this.savedRefs, cb, this.props.index);
+    }
+  }
+
+  componentWillLeave(cb) {
+    gsap.hideResults(this.savedRefs, cb, this.props.index);
   }
 
   render() {
@@ -40,16 +45,18 @@ export default class Saved extends Component {
       <div className="saved-wrapper">
         {this.state.listings ? (
           this.state.listings.map((listing, i) => (
-            <Results
-              index={i}
-              key={listing.id}
-              color={toMaterialStyle(listing.id)}
-              {...listing}
-              selectProperty={this.props.selectProperty}
-              storeRef={(ref) => {
-                this.savedRefs.push(ref);
-              }}
-            />
+            <TransitionGroup className="saved-dimensions" key={i}>
+              <Results
+                saved
+                index={i}
+                color={toMaterialStyle(listing.id)}
+                {...listing}
+                selectProperty={this.props.selectProperty}
+                storeRef={(ref) => {
+                  this.savedRefs.push(ref);
+                }}
+              />
+            </TransitionGroup>
           ))
         ) : (
           <h1>You don't have any saved listings.</h1>
@@ -61,5 +68,6 @@ export default class Saved extends Component {
 
 Saved.propTypes = {
   uid: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   selectProperty: PropTypes.func.isRequired,
 };

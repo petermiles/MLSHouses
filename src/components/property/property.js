@@ -11,19 +11,29 @@ export default class Property extends Component {
     super();
     this.state = { saved: false };
 
-    this.imageRef = '';
-    this.mapRef = '';
-    this.infoRef = '';
+    this.imageRef = [];
+    this.infoRef = [];
 
     this.saveProperty = this.saveProperty.bind(this);
   }
 
-  componentWillAppear() {
-    gsap.showProperty(this.infoRef, null);
-  }
-
   componentWillEnter(cb) {
     gsap.show([this.infoRef], cb, 0);
+  }
+
+  componentWillAppear() {
+    const imageLoading = new Promise((resolve) => {
+      this.imageRef[0].onload = (e) => {
+        console.log(e);
+        resolve();
+      };
+    });
+
+    return Promise.all([imageLoading]).then(() => {
+      gsap.showProperty(this.infoRef, null);
+    });
+
+    // This just handles image loading. I attached onload to the image ref and when the image has been succesfully loaded, then I'll trigger the gsap function to show the necessary data.
   }
 
   saveProperty() {
@@ -39,8 +49,9 @@ export default class Property extends Component {
         this.setState({ saved: true });
       });
 
-    // This saves the selected data to the Firestore database. I chose the following data model:
-    // A collection named users that will house documents associated with each user. Within each user document, I have a collection named savedList that will house their saved information. Then each individual saved property will have it's own document with the necessary information.
+    /* This saves the selected data to the Firestore database. I chose the following data model:
+    A collection named users that will house documents associated with each user. Within each user document, I have a collection named savedList that will house their saved information. Then each individual saved property will have it's own document with the necessary information.
+    */
   }
 
   render() {
@@ -57,10 +68,10 @@ export default class Property extends Component {
       stories,
     } = this.props.selected;
     return (
-      <div className="property-wrapper" ref={ref => (this.infoRef = ref)}>
+      <div className="property-wrapper" ref={ref => this.infoRef.push(ref)}>
         <div className="property-info-container">
           <img
-            ref={ref => (this.imageRef = ref)}
+            ref={ref => this.imageRef.push(ref)}
             src={photo}
             alt={address.full}
             className="image"
@@ -86,36 +97,38 @@ export default class Property extends Component {
             </div>
             <div className="property-specs-wrapper">
               <div className="property-specs">
-                <span className="property-info-piece">
-                  <span className="property-info-icon">🛏</span>
-                  <p>
-                    {beds}
-                    {beds > 1 ? ' Bedrooms' : ' Bedroom'}
-                  </p>
-                </span>
-                <span className="property-info-piece">
-                  <span className="property-info-icon">🛁</span>
-                  <p>
-                    {fullBaths} {fullBaths > 1 ? ' Bath' : ' Baths'}
-                  </p>
-                </span>
-                <span className="property-info-piece">
-                  <span className="property-info-icon">🚽</span>
-                  <p>
-                    {halfBaths}
-                    {halfBaths > 1 ? ' Half Bath' : ' Half Baths'}
-                  </p>
-                </span>
+                <div className="property-icons">
+                  <span className="property-info-piece">
+                    <span className="property-info-icon">🛏</span>
+                    <p>
+                      {beds}
+                      {beds > 1 ? ' Bedrooms' : ' Bedroom'}
+                    </p>
+                  </span>
+                  <span className="property-info-piece">
+                    <span className="property-info-icon">🛁</span>
+                    <p>
+                      {fullBaths} {fullBaths > 1 ? ' Bath' : ' Baths'}
+                    </p>
+                  </span>
+                  <span className="property-info-piece">
+                    <span className="property-info-icon">🚽</span>
+                    <p>
+                      {halfBaths}
+                      {halfBaths > 1 ? ' Half Bath' : ' Half Baths'}
+                    </p>
+                  </span>
 
-                <span className="property-info-piece">
-                  <span className="property-info-icon">🏠</span>
-                  <p>
-                    {stories} {stories > 1 ? ' Stories' : ' Story'}
-                  </p>
-                </span>
-              </div>
-              <div className="property-price">
-                <h1>${listPrice.toLocaleString()}</h1>
+                  <span className="property-info-piece">
+                    <span className="property-info-icon">🏠</span>
+                    <p>
+                      {stories} {stories > 1 ? ' Stories' : ' Story'}
+                    </p>
+                  </span>
+                </div>
+                <div className="property-price">
+                  <h1>${listPrice.toLocaleString()}</h1>
+                </div>
               </div>
             </div>
 
@@ -136,7 +149,7 @@ export default class Property extends Component {
           <Map
             geo={geo}
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-            storeMapRef={ref => (this.mapRef = ref)}
+            storeMapRef={ref => this.mapRef.push(ref)}
             loadingElement={<div style={{ height: '100%' }} />}
             containerElement={<div style={{ height: '100%' }} />}
             mapElement={<div style={{ height: '100%' }} />}

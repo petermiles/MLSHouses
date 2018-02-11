@@ -29,7 +29,9 @@ button {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  height: 82vh;
+  height: 84vh;
+  margin: 0;
+  padding: 0;
   min-width: 100%; }
 
 .results-container {
