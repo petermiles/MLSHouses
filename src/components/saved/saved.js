@@ -43,7 +43,7 @@ export default class Saved extends Component {
   render() {
     return this.state.loading ? null : (
       <div className="saved-wrapper">
-        {this.state.listings ? (
+        {this.state.listings.length ? (
           this.state.listings.map((listing, i) => (
             <TransitionGroup className="saved-dimensions" key={i}>
               <Results
@@ -59,7 +59,12 @@ export default class Saved extends Component {
             </TransitionGroup>
           ))
         ) : (
-          <h1>You don't have any saved listings.</h1>
+          <div className="no-saved-listings">
+            <span role="img" aria-label="No Saved Listings">
+              😔
+            </span>
+            <h1>{"You don't have any saved listings."}</h1>
+          </div>
         )}
       </div>
     );
@@ -67,7 +72,7 @@ export default class Saved extends Component {
 }
 
 Saved.propTypes = {
-  uid: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
+  uid: PropTypes.number.isRequired,
+  index: PropTypes.number,
   selectProperty: PropTypes.func.isRequired,
 };

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
 .saved-wrapper {
 	display: flex;
 	flex-direction: row;
@@ -11,6 +13,24 @@
 	margin: 1.5% 0;
 	width: 30%;
 	height: 100%;
+}
+
+.no-saved-listings {
+	height: 50vh;
+	width: 100%;
+	margin: 0 auto;
+	background: green;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	span {
+		font-size: 10rem;
+	}
+	h1 {
+		font-family: Roboto, sans-serif;
+	}
 }
 
 @media (max-width: 768px) {

@@ -9,7 +9,9 @@ export default {
       delay: index * 0.09,
       y: 0,
       onComplete() {
-        cb ? cb() : null;
+        if (cb) {
+          cb();
+        }
       },
     });
   },
@@ -18,7 +20,9 @@ export default {
       opacity: 0,
       y: 200,
       onComplete() {
-        cb ? cb() : null;
+        if (cb) {
+          cb();
+        }
       },
     });
   },
@@ -27,7 +31,9 @@ export default {
       opacity: 1,
       y: 0,
       onComplete() {
-        cb ? cb() : null;
+        if (cb) {
+          cb();
+        }
       },
     });
   },
@@ -35,7 +41,9 @@ export default {
     return TweenMax.to(target, 0.5, {
       opacity: 1,
       onComplete() {
-        cb ? cb() : null;
+        if (cb) {
+          cb();
+        }
       },
     });
   },
@@ -46,7 +54,9 @@ export default {
       delay: index * 0.09,
       y: 0,
       onComplete() {
-        cb ? cb() : null;
+        if (cb) {
+          cb();
+        }
       },
     });
   },

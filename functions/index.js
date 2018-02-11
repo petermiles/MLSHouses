@@ -20,7 +20,6 @@ app.get('/api/get/MLSlisting', (req, res) => {
 		})
 		.then(result => {
 			// the following function just parses out the data that I actually need to display to the user
-
 			return res.json(
 				result.data.reduce((acc, curr, ind) => {
 					acc.push({
@@ -28,7 +27,7 @@ app.get('/api/get/MLSlisting', (req, res) => {
 						mlsId: curr.listing.mlsId,
 						address: {
 							full: curr.listing.address.full,
-							postalInfo: `${curr.listing.address.city} ${
+							postalInfo: `${curr.listing.address.city} , ${
 								curr.listing.address.state
 							} ${curr.listing.address.postalCode}`,
 						},

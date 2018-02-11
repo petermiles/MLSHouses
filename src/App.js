@@ -27,15 +27,17 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this);
     // I've decided to set up a cloud function for this API call. Consindering the amount of data that I will be presenting is limited, I don't want to subject users to unnecessary data. By parsing out the values that I actually need from the API call in my cloud function, I am able to cut down the data received from the API by 55% ( 10.4KB => 4.6KB) . This might have been overkill, but I am a strong believer in only using resources that are absolutely necessary.
     axios
-      .get('https://us-central1-reside-e74b6.cloudfunctions.net/listings/api/get/MLSlisting')
+      .get(
+        'https://us-central1-reside-e74b6.cloudfunctions.net/listings/api/get/MLSlisting',
+      )
       .then(
         (result) => {
           this.setState({ listings: result.data, loading: false });
         },
         () => {
+          // Checks to see if a userid exists in local storage and if it doesn't, set the storage to that ID.
           if (!localStorage.getItem('uid')) {
             localStorage.setItem('uid', this.state.uid);
           }
@@ -54,20 +56,25 @@ export default class App extends Component {
   }
 
   render() {
-    const {
-      loading, uid, selected, showSaved,
-    } = this.state;
+    const { loading, uid, selected, showSaved } = this.state;
     return loading ? null : (
       <div className="App">
         <div className="navbar-container">
-          <h3>Peter Miles</h3>
+          <button
+            className="navbar-home-button"
+            onClick={() => {
+              this.setState({ showSaved: false, selected: '' });
+            }}
+          >
+            Home
+          </button>
           <button
             className="navbar-saved-button"
             onClick={() => {
               this.setState({ showSaved: !this.state.showSaved, selected: '' });
             }}
           >
-            {this.state.showSaved ? 'Home' : 'Saved Properties'}
+            Saved Properties
           </button>
         </div>
         {/* In reality, I shouldn't have done a nested ternary. This would have been much simpler to do had I used router, but I wanted to keep everything small enough. */}

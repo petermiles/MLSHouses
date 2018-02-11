@@ -17,6 +17,17 @@ button {
   outline: 0;
 }
 
+@mixin navbar-button($bgcolor, $fontcolor) {
+  background-color: $bgcolor;
+  color: $fontcolor;
+  font-family: Open Sans, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -43,14 +54,14 @@ button {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  height: 100%;
+  height: 84vh;
   width: 100%;
   margin: 0 auto;
 }
 
 .result-wrapper {
   cursor: pointer;
-  margin: 1.5% 0;
+  margin-bottom: 2%;
   width: 32%;
   height: 24vh;
 }
@@ -72,19 +83,21 @@ button {
 }
 
 .navbar-saved-button {
-  background-color: #81c784;
-  color: white;
-  font-family: Open Sans, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: pointer;
+  @include navbar-button(#81c784, white);
   &:hover {
     text-decoration: none;
     box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.225);
     filter: brightness(104%);
     transform: scale(1.005);
+  }
+}
+
+.navbar-home-button {
+  @include navbar-button(white, black);
+  &:hover,
+  &:active {
+    background-color: #cecece;
+    box-shadow: none !important;
   }
 }
 

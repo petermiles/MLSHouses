@@ -50,7 +50,7 @@ export default class Results extends Component {
           </div>
           <div className="info">
             <span className="icon-info">
-              <span role="img" className="bed-bath-icon">
+              <span role="img" aria-label="Baths" className="bed-bath-icon">
                 🛁
               </span>
               <p>
@@ -59,7 +59,7 @@ export default class Results extends Component {
               </p>
             </span>
             <span className="icon-info">
-              <span role="img" className="bed-bath-icon">
+              <span role="img" aria-label="Beds" className="bed-bath-icon">
                 🛏
               </span>
               <p>

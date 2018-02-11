@@ -23,7 +23,7 @@ export default class Property extends Component {
 
   componentWillAppear() {
     const imageLoading = new Promise((resolve) => {
-      this.imageRef[0].onload = (e) => {
+      this.imageRef[0].onload = () => {
         resolve();
       };
     });
@@ -158,9 +158,6 @@ export default class Property extends Component {
           </div>
 
           <div className="property-footer">
-            <button className="back-button" onClick={this.props.navHomeScreen}>
-              <p>Go Back</p>
-            </button>
             <button className="save-button" onClick={this.saveProperty}>
               {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
             </button>
@@ -185,14 +182,18 @@ export default class Property extends Component {
 Property.propTypes = {
   uid: PropTypes.number.isRequired,
   color: PropTypes.object.isRequired,
-  selected: PropTypes.object.isRequired,
-  photo: PropTypes.string.isRequired,
-  mlsId: PropTypes.number.isRequired,
-  halfBaths: PropTypes.number.isRequired,
-  fullBaths: PropTypes.number.isRequired,
-  beds: PropTypes.number.isRequired,
-  listPrice: PropTypes.string.isRequired,
-  address: PropTypes.object.isRequired,
+  selected: PropTypes.shape({
+    mlsId: PropTypes.number.isRequired,
+    halfBaths: PropTypes.number.isRequired,
+    fullBaths: PropTypes.number.isRequired,
+    beds: PropTypes.number.isRequired,
+    listPrice: PropTypes.string.isRequired,
+    listDate: PropTypes.string.isRequired,
+    address: PropTypes.object.isRequired,
+    photo: PropTypes.string.isRequired,
+    geo: PropTypes.object.isRequired,
+    stories: PropTypes.number.isRequired,
+  }).isRequired,
   navHomeScreen: PropTypes.func.isRequired,
 };
 
