@@ -15,9 +15,6 @@
 	flex-direction: row;
 }
 
-%button {
-}
-
 * {
 	box-sizing: border-box;
 	font-family: Roboto, sans-serif;
@@ -179,6 +176,10 @@
 	}
 }
 
+.already-saved {
+	background-color: #ef5350 !important;
+}
+
 p {
 	font-family: Roboto;
 }
@@ -223,7 +224,7 @@ p {
 	}
 
 	.property-specs {
-		width: 85%;
+		width: 90%;
 	}
 
 	.property-price {
@@ -247,6 +248,10 @@ p {
 	.property-info-icon {
 		font-size: 2.2rem;
 		font-weight: bold;
+	}
+
+	.saved-button {
+		min-width: 40%;
 	}
 }
 

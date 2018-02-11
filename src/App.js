@@ -90,6 +90,7 @@ export default class App extends Component {
             {this.state.listings.map((listing, i) => (
               <TransitionGroup className="result-wrapper" key={listing.id}>
                 <Results
+                  saved={false}
                   index={i}
                   openHouseId={listing.id}
                   color={toMaterialStyle(listing.id)}

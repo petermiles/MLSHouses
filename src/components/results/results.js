@@ -31,7 +31,7 @@ export default class Results extends Component {
       // save ref for use with  gsap functions
       <div
         ref={ref => (this.resultItem = ref)}
-        className={this.props.saved ? 'saved-results' : 'result-box-shadow'}
+        className={'result-box-shadow'}
         onClick={() => {
           if (id) {
             selectProperty(id);
@@ -79,7 +79,7 @@ export default class Results extends Component {
 }
 
 Results.propTypes = {
-  saved: PropTypes.string.isRequired,
+  saved: PropTypes.any.isRequired,
   color: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   halfBaths: PropTypes.number.isRequired,

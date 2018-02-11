@@ -1,50 +1,63 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
+%dimensions {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	margin: 0 auto;
+	height: 40vh;
+}
+
 .saved-wrapper {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	height: 24vh;
+	height: 26vh;
 	width: 100%;
 }
 
 .saved-dimensions {
-	margin: 1.5% 0;
-	width: 30%;
+	margin-bottom: 2.1%;
+	width: 32%;
 	height: 100%;
-	background-color: white;
+}
+
+.error-wrapper {
+	@extend %dimensions;
+
+	span {
+		font-size: 5rem;
+	}
 }
 
 .no-saved-listings {
-	height: 50vh;
-	width: 100%;
-	margin: 0 auto;
-	background: green;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	span {
-		font-size: 10rem;
-	}
+	@extend %dimensions;
 	h1 {
 		font-family: Roboto, sans-serif;
 	}
 }
 
 @media (max-width: 768px) {
+	.main-address {
+		font-size: 1.1rem;
+	}
+
+	.city-state {
+		font-size: 0.8rem;
+	}
 	.saved-dimensions {
-		width: 48%;
-		height: 30vh;
+		width: 49%;
+		height: 23vh;
 		.icon-info {
 			span {
-				font-size: 2.5rem;
+				font-size: 2rem;
 			}
 		}
 		span {
-			font-size: 1.4rem;
+			font-size: 1.3rem;
 		}
 
 		.main-address {
@@ -60,6 +73,7 @@
 @media (max-width: 468px) {
 	.saved-dimensions {
 		width: 100%;
+		height: 35vh;
 
 		.main-address {
 			font-size: 1.1rem;

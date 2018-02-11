@@ -1,47 +1,54 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+.error-wrapper, .no-saved-listings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  height: 40vh; }
+
 .saved-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  height: 24vh;
+  height: 26vh;
   width: 100%; }
 
 .saved-dimensions {
-  margin: 1.5% 0;
-  width: 30%;
-  height: 100%;
-  background-color: white; }
+  margin-bottom: 2.1%;
+  width: 32%;
+  height: 100%; }
 
-.no-saved-listings {
-  height: 50vh;
-  width: 100%;
-  margin: 0 auto;
-  background: green;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-  .no-saved-listings span {
-    font-size: 10rem; }
-  .no-saved-listings h1 {
-    font-family: Roboto, sans-serif; }
+.error-wrapper span {
+  font-size: 5rem; }
+
+.no-saved-listings h1 {
+  font-family: Roboto, sans-serif; }
 
 @media (max-width: 768px) {
+  .main-address {
+    font-size: 1.1rem; }
+
+  .city-state {
+    font-size: 0.8rem; }
+
   .saved-dimensions {
-    width: 48%;
-    height: 30vh; }
+    width: 49%;
+    height: 23vh; }
     .saved-dimensions .icon-info span {
-      font-size: 2.5rem; }
+      font-size: 2rem; }
     .saved-dimensions span {
-      font-size: 1.4rem; }
+      font-size: 1.3rem; }
     .saved-dimensions .main-address {
       font-size: 1.1rem; }
     .saved-dimensions .city-state {
       font-size: 0.8rem; } }
 @media (max-width: 468px) {
   .saved-dimensions {
-    width: 100%; }
+    width: 100%;
+    height: 35vh; }
     .saved-dimensions .main-address {
       font-size: 1.1rem; }
     .saved-dimensions .city-state {

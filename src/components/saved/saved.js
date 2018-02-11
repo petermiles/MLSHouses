@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import toMaterialStyle from 'material-color-hash';
 import { TransitionGroup } from 'react-transition-group';
-import firestore from '../../fire';
-import Results from '../results/results';
-import gsap from '../../gsap/animations';
+import firestore from 'fire'; // eslint-disable-line
+import Results from 'components/results/results'; // eslint-disable-line
+import gsap from 'gsap/animations'; // eslint-disable-line
 import './saved.css';
 
 export default class Saved extends Component {
   constructor(props) {
     super(props);
-    this.state = { listings: [''], loading: true };
+    this.state = { listings: [], loading: true, error: false };
 
     this.savedRefs = [];
   }
@@ -27,7 +27,9 @@ export default class Saved extends Component {
         });
         this.setState({ listings: arr, loading: false });
       })
-      .catch(console.log);
+      .catch(() => {
+        this.setState({ loading: false, error: true });
+      });
   }
 
   componentWillAppear(cb) {
@@ -41,6 +43,19 @@ export default class Saved extends Component {
   }
 
   render() {
+    if (this.state.error) {
+      return (
+        <div className="error-wrapper">
+          <span role="img" aria-label="Error Loading Properties">
+            😔
+          </span>
+          <h3>
+            Sorry!<br />There was an error loading your saved properties
+          </h3>
+        </div>
+      );
+    }
+
     return this.state.loading ? null : (
       <div className="saved-wrapper">
         {this.state.listings.length ? (
@@ -60,10 +75,7 @@ export default class Saved extends Component {
           ))
         ) : (
           <div className="no-saved-listings">
-            <span role="img" aria-label="No Saved Listings">
-              😔
-            </span>
-            <h1>{"You don't have any saved listings."}</h1>
+            <h1>{"You don't have any saved listings"}</h1>
           </div>
         )}
       </div>
@@ -72,7 +84,6 @@ export default class Saved extends Component {
 }
 
 Saved.propTypes = {
-  uid: PropTypes.number.isRequired,
-  index: PropTypes.number,
+  uid: PropTypes.string.isRequired,
   selectProperty: PropTypes.func.isRequired,
 };

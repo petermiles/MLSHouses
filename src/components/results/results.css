@@ -89,10 +89,13 @@
     width: 100%; }
 
   .icon-info span {
-    font-size: 30px; } }
+    font-size: 30px; }
+
+  .main-address {
+    font-size: 14px; } }
 @media (max-width: 480px) {
   .main-address {
-    font-size: 1.1rem; }
+    font-size: 1rem; }
 
   .city-state {
     font-size: 0.9rem; }

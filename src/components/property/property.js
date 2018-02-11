@@ -41,22 +41,28 @@ export default class Property extends Component {
       .doc(`${this.props.uid}`)
       .collection('savedList');
     savedListRef.get().then((result) => {
-      let saved = false;
-      result.forEach((doc) => {
-        saved = doc.data().mlsId === this.props.selected.mlsId;
+      const savedPromise = new Promise((resolve, reject) => {
+        result.forEach((doc) => {
+          if (doc.data().mlsId === this.props.selected.mlsId) {
+            reject();
+          }
+        });
+        resolve();
       });
-      if (saved) {
-        this.setState({ alreadySaved: true });
-      } else {
-        savedListRef
-          .doc()
-          .set({
-            ...this.props.selected,
-          })
-          .then(() => {
-            this.setState({ saved: true });
-          });
-      }
+      savedPromise
+        .then(() => {
+          savedListRef
+            .doc()
+            .set({
+              ...this.props.selected,
+            })
+            .then(() => {
+              this.setState({ saved: true });
+            });
+        })
+        .catch(() => {
+          this.setState({ alreadySaved: true });
+        });
     });
 
     /*
@@ -173,7 +179,10 @@ export default class Property extends Component {
           </div>
           <div className="property-footer">
             {this.state.alreadySaved ? (
-              <button className="save-button"> Already Saved </button>
+              <button className="save-button already-saved">
+                {' '}
+                Already Saved{' '}
+              </button>
             ) : (
               <button className="save-button" onClick={this.saveProperty}>
                 {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
@@ -198,7 +207,7 @@ export default class Property extends Component {
 }
 
 Property.propTypes = {
-  uid: PropTypes.number.isRequired,
+  uid: PropTypes.string.isRequired,
   color: PropTypes.object.isRequired,
   selected: PropTypes.shape({
     mlsId: PropTypes.number.isRequired,
