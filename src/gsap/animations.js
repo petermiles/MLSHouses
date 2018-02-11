@@ -4,7 +4,6 @@ const topRatedDuration = 0.33;
 
 export default {
   showResults(targets, cb, index) {
-    console.log(targets);
     TweenMax.to(targets, topRatedDuration, {
       opacity: 1,
       delay: index * 0.09,
@@ -15,7 +14,6 @@ export default {
     });
   },
   hideResults(target, cb) {
-    console.log('leaving', target);
     return TweenMax.to(target, 0.4, {
       opacity: 0,
       y: 200,
@@ -43,7 +41,6 @@ export default {
   },
 
   showSaved(targets, cb, index) {
-    console.log(targets);
     TweenMax.to(targets, topRatedDuration, {
       opacity: 1,
       delay: index * 0.09,

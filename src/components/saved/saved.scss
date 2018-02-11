@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: space-between;
 	height: 24vh;
 	width: 100%;
 }
@@ -10,5 +10,62 @@
 .saved-dimensions {
 	margin: 1.5% 0;
 	width: 30%;
-	height: 24vh;
+	height: 100%;
+}
+
+@media (max-width: 768px) {
+	.saved-dimensions {
+		width: 48%;
+		height: 30vh;
+		.icon-info {
+			span {
+				font-size: 2.5rem;
+			}
+		}
+		span {
+			font-size: 1.4rem;
+		}
+
+		.main-address {
+			font-size: 1.1rem;
+		}
+
+		.city-state {
+			font-size: 0.8rem;
+		}
+	}
+}
+
+@media (max-width: 468px) {
+	.saved-dimensions {
+		width: 100%;
+
+		.main-address {
+			font-size: 1.1rem;
+		}
+
+		.city-state {
+			font-size: 0.9rem;
+		}
+
+		.info {
+			width: 90%;
+			padding: 5px 0;
+		}
+
+		.price {
+			p {
+				font-size: 18px;
+			}
+		}
+		.icon-info {
+			span {
+				font-size: 1.5rem;
+			}
+
+			p {
+				font-size: 1.2rem;
+			}
+		}
+	}
 }

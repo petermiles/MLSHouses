@@ -24,7 +24,6 @@ export default class Property extends Component {
   componentWillAppear() {
     const imageLoading = new Promise((resolve) => {
       this.imageRef[0].onload = (e) => {
-        console.log(e);
         resolve();
       };
     });
@@ -69,82 +68,105 @@ export default class Property extends Component {
     } = this.props.selected;
     return (
       <div className="property-wrapper" ref={ref => this.infoRef.push(ref)}>
-        <div className="property-info-container">
+        <div className="property-image-container">
           <img
             ref={ref => this.imageRef.push(ref)}
             src={photo}
             alt={address.full}
             className="image"
           />
-          <div className="property-info-wrapper">
-            <div
-              className="property-info-header"
-              style={{
-                backgroundColor: this.props.color.backgroundColor,
-                color: this.props.color.color,
-              }}
-            >
-              <p className="property-address">{address.full}</p>
-              <p className="property-address">{address.postalInfo}</p>
-            </div>
-            <div className="property-meta-data">
-              <p className="property-mslid">
-                MLSID <br /> {mlsId}
-              </p>
-              <p className="property-list-date">
-                List Date <br /> {listDate}
-              </p>
-            </div>
-            <div className="property-specs-wrapper">
-              <div className="property-specs">
-                <div className="property-icons">
-                  <span className="property-info-piece">
-                    <span className="property-info-icon">🛏</span>
-                    <p>
-                      {beds}
-                      {beds > 1 ? ' Bedrooms' : ' Bedroom'}
-                    </p>
-                  </span>
-                  <span className="property-info-piece">
-                    <span className="property-info-icon">🛁</span>
-                    <p>
-                      {fullBaths} {fullBaths > 1 ? ' Bath' : ' Baths'}
-                    </p>
-                  </span>
-                  <span className="property-info-piece">
-                    <span className="property-info-icon">🚽</span>
-                    <p>
-                      {halfBaths}
-                      {halfBaths > 1 ? ' Half Bath' : ' Half Baths'}
-                    </p>
-                  </span>
+        </div>
 
-                  <span className="property-info-piece">
-                    <span className="property-info-icon">🏠</span>
-                    <p>
-                      {stories} {stories > 1 ? ' Stories' : ' Story'}
-                    </p>
+        <div className="property-info-wrapper">
+          <div
+            className="property-info-header"
+            style={{
+              backgroundColor: this.props.color.backgroundColor,
+              color: this.props.color.color,
+            }}
+          >
+            <p className="property-address">{address.full}</p>
+            <p className="property-address">{address.postalInfo}</p>
+          </div>
+          <div className="property-meta-data">
+            <p className="property-mslid">
+              MLSID <br /> {mlsId}
+            </p>
+            <p className="property-list-date">
+              List Date <br /> {listDate}
+            </p>
+          </div>
+          <div className="property-specs-wrapper">
+            <div className="property-specs">
+              <div className="property-icons">
+                <span className="property-info-piece">
+                  <span
+                    role="img"
+                    aria-label="Beds"
+                    className="property-info-icon"
+                  >
+                    🛏
                   </span>
-                </div>
-                <div className="property-price">
-                  <h1>${listPrice.toLocaleString()}</h1>
-                </div>
+                  <p>
+                    {beds}
+                    {beds > 1 ? ' Bedrooms' : ' Bedroom'}
+                  </p>
+                </span>
+                <span className="property-info-piece">
+                  <span
+                    role="img"
+                    aria-label="Full Bath"
+                    className="property-info-icon"
+                  >
+                    🛁
+                  </span>
+                  <p>
+                    {fullBaths} {fullBaths > 1 ? ' Bath' : ' Baths'}
+                  </p>
+                </span>
+                <span className="property-info-piece">
+                  <span
+                    role="img"
+                    aria-label="Half Bath"
+                    className="property-info-icon"
+                  >
+                    🚽
+                  </span>
+                  <p>
+                    {halfBaths}
+                    {halfBaths > 1 ? ' Half Bath' : ' Half Baths'}
+                  </p>
+                </span>
+
+                <span className="property-info-piece">
+                  <span
+                    role="img"
+                    aria-label="Stories"
+                    className="property-info-icon"
+                  >
+                    🏠
+                  </span>
+                  <p>
+                    {stories} {stories > 1 ? ' Stories' : ' Story'}
+                  </p>
+                </span>
+              </div>
+              <div className="property-price">
+                <h1>${listPrice.toLocaleString()}</h1>
               </div>
             </div>
+          </div>
 
-            <div className="property-footer">
-              <button
-                className="back-button"
-                onClick={this.props.navHomeScreen}
-              >
-                <p>Go Back</p>
-              </button>
-              <button className="save-button" onClick={this.saveProperty}>
-                {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
-              </button>
-            </div>
+          <div className="property-footer">
+            <button className="back-button" onClick={this.props.navHomeScreen}>
+              <p>Go Back</p>
+            </button>
+            <button className="save-button" onClick={this.saveProperty}>
+              {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
+            </button>
           </div>
         </div>
+
         <div className="map-container">
           <Map
             geo={geo}

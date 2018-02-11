@@ -30,7 +30,7 @@
 }
 
 .result-container {
-	min-height: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -86,7 +86,6 @@
 
 .bed-bath-icon {
 	padding-bottom: 8px;
-	vertical-align: middle;
 }
 
 .price {
@@ -102,13 +101,35 @@
 	text-align: center;
 }
 
+@media (max-width: 768px) {
+	.info {
+		width: 100%;
+	}
+
+	.icon-info {
+		span {
+			font-size: 30px;
+		}
+	}
+}
+
 @media (max-width: 480px) {
 	.main-address {
-		font-size: 13px;
+		font-size: 1.1rem;
+	}
+
+	.city-state {
+		font-size: 0.9rem;
 	}
 
 	.info {
-		width: 80%;
+		width: 90%;
+	}
+
+	.price {
+		p {
+			font-size: 18px;
+		}
 	}
 }
 

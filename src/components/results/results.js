@@ -4,17 +4,11 @@ import gsap from '../../gsap/animations';
 import './results.css';
 
 export default class Results extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
     this.props.storeRef(this.item);
   }
 
   componentWillAppear(cb) {
-    console.log(this.item);
     gsap.showResults(this.item, cb, this.props.index);
   }
 
