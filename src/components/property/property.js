@@ -59,7 +59,11 @@ export default class Property extends Component {
       }
     });
 
-    /* This saves the selected data to the Firestore database. I chose the following data model:
+    /*
+    This is the function responsible for saving data to Firestore. I first do a check to see if that property has already been saved and if it has, then it will show an already-saved button. If the user hasn't saved it, it will save it to Firestore.
+
+    Had I used firebase authentication, I could've use cloud functions to do a check to make sure that the value hadn't already been saved.
+
     A collection named users that will house documents associated with each user. Within each user document, I have a collection named savedList that will house their saved information. Then each individual saved property will have it's own document with the necessary information.
     */
   }
@@ -171,12 +175,12 @@ export default class Property extends Component {
           <div className="property-footer">
             {this.state.alreadySaved ? (
               <button className="save-button"> Already Saved </button>
-            ) : (
-              <button className="save-button" onClick={this.saveProperty}>
-                {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
-              </button>
-            )}
-          </div>
+  ) : (
+    <button className="save-button" onClick={this.saveProperty}>
+      {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
+    </button>
+  )}
+          </div>;
         </div>
 
         <div className="map-container">
@@ -209,15 +213,4 @@ Property.propTypes = {
     geo: PropTypes.object.isRequired,
     stories: PropTypes.number.isRequired,
   }).isRequired,
-  navHomeScreen: PropTypes.func.isRequired,
 };
-
-// address
-// stories
-// bedrooms
-// baths full
-// baths half
-// mlsld
-// list date MM/DD/YYYY
-// a photo
-// list price

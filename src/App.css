@@ -22,7 +22,8 @@ button {
   align-items: center;
   min-height: 100vh;
   min-width: 100vw;
-  padding: 4vh 4vw; }
+  padding: 4vh 4vw;
+  background-color: whitesmoke; }
 
 .saved-container {
   display: flex;
@@ -39,7 +40,7 @@ button {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  height: 84vh;
+  height: 100%;
   width: 100%;
   margin: 0 auto; }
 
@@ -47,7 +48,8 @@ button {
   cursor: pointer;
   margin-bottom: 2%;
   width: 32%;
-  height: 24vh; }
+  height: 24vh;
+  background-color: white; }
 
 .property-container {
   width: 100%;
@@ -79,6 +81,7 @@ button {
     transform: scale(1.005); }
 
 .navbar-home-button {
+  background-color: transparent !important;
   background-color: white;
   color: black;
   font-family: Open Sans, sans-serif;
@@ -87,9 +90,6 @@ button {
   padding: 12px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer; }
-  .navbar-home-button:hover, .navbar-home-button:active {
-    background-color: #cecece;
-    box-shadow: none !important; }
 
 @media (max-width: 468px) {
   .results-container {

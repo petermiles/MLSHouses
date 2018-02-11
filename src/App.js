@@ -71,7 +71,7 @@ export default class App extends Component {
           <button
             className="navbar-saved-button"
             onClick={() => {
-              this.setState({ showSaved: !this.state.showSaved, selected: '' });
+              this.setState({ showSaved: true, selected: '' });
             }}
           >
             Saved Properties
@@ -94,9 +94,6 @@ export default class App extends Component {
               uid={uid}
               color={toMaterialStyle(selected.id)}
               selected={selected}
-              navHomeScreen={() => {
-                this.setState({ selected: '' });
-              }}
             />
           </TransitionGroup>
         ) : (
