@@ -212,19 +212,19 @@ p {
 	.property-info-container {
 		padding-right: 0;
 		min-width: 100%;
-		order: 3;
 	}
 
 	.property-info-wrapper {
 		max-width: 49%;
 		height: 50%;
+		order: 2;
 	}
 
 	.map-container {
-		order: 2;
+		order: 3;
 		max-width: 49%;
 		height: 50%;
-		background-color: blue;
+		background-color: #cecece;
 	}
 
 	.image {
@@ -233,7 +233,7 @@ p {
 	}
 
 	.property-specs {
-		width: 75%;
+		width: 85%;
 	}
 
 	.property-price {

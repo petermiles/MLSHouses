@@ -36,17 +36,28 @@ export default class Property extends Component {
   }
 
   saveProperty() {
-    firestore
+    const savedListRef = firestore
       .collection('users')
       .doc(`${this.props.uid}`)
-      .collection('savedList')
-      .doc()
-      .set({
-        ...this.props.selected,
-      })
-      .then(() => {
-        this.setState({ saved: true });
+      .collection('savedList');
+    savedListRef.get().then((result) => {
+      let saved = false;
+      result.forEach((doc) => {
+        saved = doc.data().mlsId === this.props.selected.mlsId;
       });
+      if (saved) {
+        this.setState({ alreadySaved: true });
+      } else {
+        savedListRef
+          .doc()
+          .set({
+            ...this.props.selected,
+          })
+          .then(() => {
+            this.setState({ saved: true });
+          });
+      }
+    });
 
     /* This saves the selected data to the Firestore database. I chose the following data model:
     A collection named users that will house documents associated with each user. Within each user document, I have a collection named savedList that will house their saved information. Then each individual saved property will have it's own document with the necessary information.
@@ -158,9 +169,13 @@ export default class Property extends Component {
           </div>
 
           <div className="property-footer">
-            <button className="save-button" onClick={this.saveProperty}>
-              {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
-            </button>
+            {this.state.alreadySaved ? (
+              <button className="save-button"> Already Saved </button>
+            ) : (
+              <button className="save-button" onClick={this.saveProperty}>
+                {!this.state.saved ? <p>Save Property</p> : <p> Saved </p>}
+              </button>
+            )}
           </div>
         </div>
 
