@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import firestore from '../../fire';
-import gsap from '../../gsap/animations';
+import firestore from 'fire'; // eslint-disable-line
+import gsap from 'gsap/animations'; // eslint-disable-line
 
-import Map from '../map/map';
+import Map from 'components/map/map'; // eslint-disable-line
 import './property.css';
 
 export default class Property extends Component {

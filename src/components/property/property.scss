@@ -179,20 +179,6 @@
 	}
 }
 
-.back-button {
-	color: #f44336;
-	background: white;
-	&:hover,
-	&:active {
-		background-color: #cecece;
-		box-shadow: none !important;
-	}
-}
-
-.already-saved {
-	background-color: #f44336 !important;
-}
-
 p {
 	font-family: Roboto;
 }

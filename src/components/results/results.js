@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import gsap from '../../gsap/animations';
+import gsap from 'gsap/animations';
 import './results.css';
 
 export default class Results extends Component {
@@ -9,11 +9,11 @@ export default class Results extends Component {
   }
 
   componentWillAppear(cb) {
-    gsap.showResults(this.item, cb, this.props.index);
+    gsap.showResults(this.resultItem, cb, this.props.index);
   }
 
   componentWillLeave(cb) {
-    gsap.hideResults(this.item, cb, this.props.index);
+    gsap.hideResults(this.resultItem, cb, this.props.index);
   }
 
   render() {
@@ -28,8 +28,9 @@ export default class Results extends Component {
     } = this.props;
 
     return (
+      // save ref for use with  gsap functions
       <div
-        ref={ref => (this.item = ref)}
+        ref={ref => (this.resultItem = ref)}
         className={this.props.saved ? 'saved-results' : 'result-box-shadow'}
         onClick={() => {
           if (id) {
@@ -78,6 +79,7 @@ export default class Results extends Component {
 }
 
 Results.propTypes = {
+  saved: PropTypes.string.isRequired,
   color: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   halfBaths: PropTypes.number.isRequired,

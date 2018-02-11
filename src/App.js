@@ -7,6 +7,7 @@ import gsap from './gsap/animations';
 import Results from './components/results/results';
 import Property from './components/property/property';
 import Saved from './components/saved/saved';
+import Navbar from './components/navbar/navbar';
 
 export default class App extends Component {
   constructor(props) {
@@ -18,7 +19,6 @@ export default class App extends Component {
       listings: '',
       selected: '',
       uid: '',
-      // this is the random userid. I decided to set this up in the constructor because I don't think that assigning a userid would justify a rerender triggered by setState.
     };
     this.propertyRef = [];
     this.listingsRefs = [];
@@ -36,10 +36,12 @@ export default class App extends Component {
         if (!localStorage.getItem('uid')) {
           localStorage.setItem('uid', Math.random() * 100000);
         }
+        // This checks to see if there a user ID saved in the local storage. If there isn't, it will create a random number for the user ID.
         this.setState({
           listings: result.data,
           loading: false,
           uid: localStorage.getItem('uid'),
+          // Saves the uid to state for use everywhere else.
         });
       });
   }
@@ -59,24 +61,12 @@ export default class App extends Component {
     return loading ? null : (
       <div className="App">
         <div className="navbar-container">
-          <button
-            className="navbar-home-button"
-            onClick={() => {
-              this.setState({ showSaved: false, selected: '' });
-            }}
-          >
-            Home
-          </button>
-          <button
-            className="navbar-saved-button"
-            onClick={() => {
-              this.setState({ showSaved: true, selected: '' });
-            }}
-          >
-            Saved Properties
-          </button>
+          <Navbar
+            navToSaved={() => this.setState({ showSaved: true, selected: '' })}
+            navToHome={() => this.setState({ showSaved: false, selected: '' })}
+          />
         </div>
-        {/* In reality, I shouldn't have done a nested ternary. This would have been much simpler to do had I used router, but I wanted to keep everything small enough. */}
+        {/* In reality, I shouldn't have done a nested ternary. This would have been much simpler to do had I used router, but I wanted to keep everything small and simple enough. */}
         {showSaved ? (
           <div className="saved-container">
             <Saved

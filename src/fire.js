@@ -11,6 +11,7 @@ const config = {
   messagingSenderId: '758368004577',
 };
 
-// const firebase = fire.initializeApp(config).firestore();
+// Usually I would put the config in a gitignore but since this is a small demo project, I decided not to.
+
 const firestore = firebase.initializeApp(config).firestore();
 export default firestore;
