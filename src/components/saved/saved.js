@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import toMaterialStyle from 'material-color-hash';
 import firestore from '../../fire';
 import Results from '../results/results';
+import gsap from '../../gsap/animations';
 import './saved.css';
 
 export default class Saved extends Component {
@@ -29,6 +30,11 @@ export default class Saved extends Component {
       })
       .catch(console.log);
   }
+
+  componentWillAppear(cb) {
+    gsap.showResults(this.savedRefs, cb, this.props.index);
+  }
+
   render() {
     return this.state.loading ? null : (
       <div className="saved-wrapper">
